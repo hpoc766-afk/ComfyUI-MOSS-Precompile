@@ -1,0 +1,89 @@
+{
+  "MOSSPrecompileLoader": {
+    "display_name": "MOSS 模型加载器",
+    "description": "通过官方MOSS后端统一加载模型，可选通用预编译与LoRA热切换。",
+    "inputs": {
+      "dit_name": {
+        "name": "主干模型",
+        "tooltip": "由官方MOSS加载器解析的主干权重，不限制量化格式。"
+      },
+      "text_encoder_name": {
+        "name": "文本编码器",
+        "tooltip": "选择MOSS使用的Qwen3.5文本编码器文件。"
+      },
+      "vae_name": {
+        "name": "变分自编码器",
+        "tooltip": "选择MOSS的VAE文件。"
+      },
+      "weight_dtype": {
+        "name": "计算精度",
+        "tooltip": "原样传给官方MOSS加载器，由原后端决定权重格式和计算方式。"
+      },
+      "text_device": {
+        "name": "文本编码器设备",
+        "tooltip": "沿用官方加载器的default/cpu设备选项。"
+      },
+      "precompile": {
+        "name": "启用预编译",
+        "tooltip": "仅编译MOSS block外围的加法/乘法，Attention、MLP与权重读取沿用原实现。"
+      },
+      "hot_lora": {
+        "name": "启用 LoRA 热插拔",
+        "tooltip": "后续普通LoRA节点使用兼容的低秩旁路，保留实际rank，按反序撤回，不重新量化底座。"
+      },
+      "full_precompile": {
+        "name": "全部预编译（模型计算）",
+        "tooltip": "分别尝试TE Transformer、DiT与VAE编解码严格整图；原生动态mask或后端不兼容时直接报错，不修改模型。"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "模型"
+      },
+      "1": {
+        "name": "文本编码器"
+      },
+      "2": {
+        "name": "变分自编码器"
+      }
+    }
+  },
+  "MOSSPrecompile": {
+    "display_name": "MOSS 模型预编译",
+    "description": "连接现有MOSS加载器输出，保持原模型与权重后端，选择编译及热LoRA。",
+    "inputs": {
+      "model": {
+        "name": "模型"
+      },
+      "clip": {
+        "name": "文本编码器"
+      },
+      "vae": {
+        "name": "变分自编码器"
+      },
+      "precompile": {
+        "name": "启用预编译",
+        "tooltip": "仅编译MOSS block外围的加法/乘法，Attention、MLP与权重读取沿用原实现。"
+      },
+      "hot_lora": {
+        "name": "启用 LoRA 热插拔",
+        "tooltip": "后续普通LoRA节点使用兼容的低秩旁路，保留实际rank，按反序撤回，不重新量化底座。"
+      },
+      "full_precompile": {
+        "name": "全部预编译（模型计算）",
+        "tooltip": "分别尝试TE Transformer、DiT与VAE编解码严格整图；原生动态mask或后端不兼容时直接报错，不修改模型。"
+      }
+    },
+    "outputs": {
+      "0": {
+        "name": "模型"
+      },
+      "1": {
+        "name": "文本编码器"
+      },
+      "2": {
+        "name": "变分自编码器"
+      }
+    }
+  }
+}

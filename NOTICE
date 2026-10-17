@@ -1,0 +1,20 @@
+ComfyUI-MOSS-Precompile
+Copyright (C) 2026 hpoc766-afk
+SPDX-License-Identifier: GPL-3.0-only
+
+This project uses the public model, loader and LoRA APIs of ComfyUI and the
+installed official OpenMOSS/MOSS-Image ComfyUI backend.
+
+The MOSS block arithmetic adapter in runtime.py follows/adapts the mathematical
+sequence in MOSS-Image's comfyui/moss-image/model.py (_Block.forward), licensed
+by its upstream authors under Apache License 2.0. The original attention and
+nonlinear functions are called from the installed upstream package. Upstream
+copyrights remain with their respective authors; the Apache license is included
+under licenses/Apache-2.0.txt.
+
+Generic compilation and LoRA management modules are adapted from the author's
+ComfyUI-K2-Precompile project under GNU GPL v3, with MOSS-specific entry points.
+The combined node source is distributed under GNU GPL v3; see LICENSE.
+
+Model weights, ComfyUI, the official MOSS package and quantization backends are
+not bundled. Their respective licenses remain applicable.
